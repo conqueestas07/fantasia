@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Paisaje de Fantasía VR</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  <script src="world.js"></script>
+</head>
+<body>
+
+<div id="hint">WASD · mover  |  ratón / gafas · mirar</div>
+
+<a-scene
+  fog="type:exponential;color:#1a0a2e;density:0.018"
+  renderer="antialias:true;colorManagement:true"
+  shadow="type:pcfsoft">
+
+  <!-- ░░ CIELO ░░ -->
+  <a-sky color="#1a0a2e"></a-sky>
+
+  <!-- Estrellas -->
+  <a-entity id="stars"></a-entity>
+
+  <!-- Luna grande -->
+  <a-sphere
+    position="30 40 -80"
+    radius="8"
+    color="#e8d8ff"
+    emission="#c9a0ff">
+  </a-sphere>
+
+  <!-- Halo de luna -->
+  <a-torus
+    position="30 40 -80"
+    radius="11" radius-tubular="0.15"
+    color="#b06eff"
+    opacity="0.4">
+  </a-torus>
+
+  <!-- ░░ SUELO ░░ -->
+  <a-plane
+    rotation="-90 0 0"
+    width="300" height="300"
+    color="#12082a"
+    shadow="receive:true">
+  </a-plane>
+
+  <!-- Hierba mágica (planos verticales) -->
+  <a-entity id="grass"></a-entity>
+
+  <!-- ░░ LAGO CENTRAL ░░ -->
+  <a-circle
+    id="lake"
+    rotation="-90 0 0"
+    position="0 0.02 -15"
+    radius="12"
+    color="#2a1a5e"
+    opacity="0.85"
+    animation="property:material.color;
+               from:#2a1a5e;to:#1a3a6e;
+               dur:3000;dir:alternate;loop:true">
+  </a-circle>
+
+  <!-- ░░ ÁRBOLES FANTÁSTICOS ░░ -->
+  <a-entity id="trees"></a-entity>
+
+  <!-- ░░ MONTAÑAS ░░ -->
+  <a-entity id="mountains"></a-entity>
+
+  <!-- ░░ CRISTALES MÁGICOS ░░ -->
+  <a-entity id="crystals"></a-entity>
+
+  <!-- ░░ LUCIÉRNAGAS ░░ -->
+  <a-entity id="fireflies"></a-entity>
+
+  <!-- ░░ RUINAS ░░ -->
+  <a-entity id="ruins"></a-entity>
+
+  <!-- ░░ LUCES ░░ -->
+  <a-light type="ambient"     color="#3a1a6e" intensity="0.6"></a-light>
+  <a-light type="directional" color="#c9a0ff" intensity="0.8"
+           position="30 40 -80" cast-shadow="true"></a-light>
+  <a-light type="point"       color="#7733ff" intensity="1.5"
+           position="0 2 -15"  distance="25"></a-light>
+
+  <!-- ░░ JUGADOR con movimiento libre ░░ -->
+  <a-entity
+    id="player"
+    position="0 1.6 10"
+    fantasy-movement="">
+
+    <a-camera
+      look-controls="pointerLockEnabled:true;
+                     magicWindowTrackingEnabled:true"
+      wasd-controls="enabled:false"
+      fov="85">
+      <a-cursor color="#b06eff" opacity="0.5"
+               scale="0.4 0.4 0.4"></a-cursor>
+    </a-camera>
+
+    <!-- Controladores VR -->
+    <a-entity oculus-touch-controls="hand:left"></a-entity>
+    <a-entity oculus-touch-controls="hand:right"></a-entity>
+  </a-entity>
+
+</a-scene>
+</body>
+</html>
